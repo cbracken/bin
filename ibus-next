@@ -1,0 +1,17 @@
+#!/bin/bash
+
+IBUS=/usr/bin/ibus
+
+engine=$($IBUS engine)
+case "$engine" in
+  mozc-jp)
+    engine=xkb:us::eng
+    ;;
+  xkb:us::eng)
+    engine=mozc-jp
+    ;;
+  *)
+    echo "Unknown keyboard layout $engine"
+    exit 1
+esac
+$IBUS engine $engine
